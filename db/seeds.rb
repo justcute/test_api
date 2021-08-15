@@ -6,7 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
-  user = User.create({login: Faker::Internet.username})
-  user.posts.create({title: Faker::Book.title, description: Faker::Lorem.sentence})
+
+100.times do
+  User.create(login: Faker::Internet.username)
+end
+
+ips = []
+50.times do
+  ips.push(Faker::Internet.private_ip_v4_address)
+end
+
+200.times do
+  Post.create({title: Faker::Book.title,
+                description: Faker::Lorem.sentence,
+                user_id: rand(User.count-1),
+                ip_adress: ips[rand(ips.count-1)]})
+end
+
+150.times do
+  Post.all.shuffle[1].marks.create(value: rand(1..5))
 end
