@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do
-  user = User.create({login: Faker::Name.name})
+  user = User.create({login: Faker::Internet.username})
   user.posts.create({title: Faker::Book.title, description: Faker::Lorem.sentence})
 end
