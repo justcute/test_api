@@ -16,13 +16,13 @@ ips = []
   ips.push(Faker::Internet.private_ip_v4_address)
 end
 
-200.times do
+200000.times do
   Post.create({title: Faker::Book.title,
-                description: Faker::Lorem.sentence,
-                user_id: rand(User.count-1),
-                ip_adress: ips[rand(ips.count-1)]})
+               description: Faker::Lorem.sentence,
+               user_id: rand(User.count-1),
+               ip_adress: ips[rand(ips.count-1)]})
 end
 
-150.times do
+1500.times do
   Post.all.shuffle[1].marks.create(value: rand(1..5))
 end
