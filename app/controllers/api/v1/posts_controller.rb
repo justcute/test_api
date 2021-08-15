@@ -2,7 +2,7 @@ module Api
   module V1
       class PostsController < ApplicationController
         def index
-          @posts = Post.includes(:marks).order('AVG(marks.value DESC').first(params[:top].to_i)
+          @posts = Post.all.sort_by {|post| post.marks.average(:value).to_i}.last(params[:top].to_i)
      
           render json: @posts
         end
